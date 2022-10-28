@@ -45,7 +45,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateEmployee(@PathVariable int id, @RequestPart("employee") Employee employee, @RequestPart("image") MultipartFile image) {
+    public ResponseEntity<?> updateEmployee(@PathVariable int id, @RequestPart("employee") Employee employee, @RequestPart(value="image", required = false) MultipartFile image) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(employeeServiceimp.update(id, employee, image));
         } catch (Exception e) {
