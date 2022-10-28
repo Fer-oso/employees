@@ -27,9 +27,9 @@ public class EmployeeController {
     }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createEmployee(@RequestPart("employee") Employee employee,@RequestPart("image")MultipartFile image) throws Exception {
+    public ResponseEntity<?> createEmployee(@RequestPart("employee") Employee employee, @RequestPart(value = "image", required = false) MultipartFile image) throws Exception {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(employeeServiceimp.save(employee,image));
+            return ResponseEntity.status(HttpStatus.CREATED).body(employeeServiceimp.save(employee, image));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -45,9 +45,9 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateEmployee(@PathVariable int id, @RequestPart("employee") Employee employee,@RequestPart("image") MultipartFile image) {
+    public ResponseEntity<?> updateEmployee(@PathVariable int id, @RequestPart("employee") Employee employee, @RequestPart("image") MultipartFile image) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(employeeServiceimp.update(id, employee,image));
+            return ResponseEntity.status(HttpStatus.CREATED).body(employeeServiceimp.update(id, employee, image));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

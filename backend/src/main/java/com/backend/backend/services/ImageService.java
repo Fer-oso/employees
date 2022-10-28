@@ -19,16 +19,12 @@ public class ImageService {
         this.uploadFileService = uploadFileService;
     }
 
-    public Image save(MultipartFile image) throws Exception {
-        try {
+    public Image save(MultipartFile image) throws Exception {    
             if (image.isEmpty()) {
                 throw new Exception("you must select an image");
             } else {
                 return imageRepository.save(new Image(uploadFileService.copy(image), image.getContentType()));
-            }
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+            }      
     }
 
     public List<Image> findAll() throws Exception {

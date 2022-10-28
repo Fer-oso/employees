@@ -1,5 +1,6 @@
 package com.backend.backend.entitys;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +19,9 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "employees")
-public class Employee {
+public class Employee implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +35,7 @@ public class Employee {
     private String email;
     @Column(name = "charge")
     private String charge;
-    
+   
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="employee_image",joinColumns = @JoinColumn(name="id_employee",referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name="id_image",referencedColumnName = "id"))
